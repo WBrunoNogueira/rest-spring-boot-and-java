@@ -1,3 +1,11 @@
+
+/*
+* Um Controller é como o "porteiro" da aplicação web no
+* Spring: ele recebe os pedidos de entrada (requisições HTTP), chama quem precisa dentro do sistema (serviços, repositórios) e devolve uma resposta.
+Quer que eu te mostre também como fica um Controller mais completo, com POST, PUT, DELETE e recebendo dados do cliente?
+*
+*
+* */
 package com.er.rest_spring_boot_and_java.controllers;
 
 import com.er.rest_spring_boot_and_java.model.Greeting;
