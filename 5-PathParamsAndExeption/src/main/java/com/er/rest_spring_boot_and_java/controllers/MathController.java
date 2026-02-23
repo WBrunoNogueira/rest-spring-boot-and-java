@@ -1,29 +1,34 @@
 package com.er.rest_spring_boot_and_java.controllers;
 
+
+
+import com.er.rest_spring_boot_and_java.controllers.exception.UnsupportedMathOperationException;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/math")
+@RequestMapping("/math") // Define o path base para o controlador
 public class MathController {
+    
+    @RequestMapping(value="/sum/{numberOne}/{numberTwo}")
+    public Double sum(@PathVariable("numberOne") String numberOne,
+                      @PathVariable("numberTwo") String numberTwo) throws Exception {
+        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) {
+            throw new UnsupportedMathOperationException("Please set a numeric value!");
+        }
+        return covertToDouble(numberOne) + covertToDouble(numberTwo);
+    }    
+    
+    public static Double covertToDouble(String strNumber) {
+		if (strNumber == null) return 0d; 
+		String number = strNumber.replaceAll(",", ".");// Moeda Americana x Brasileira
+		return Double.parseDouble(number);
+	}
 
-    //http://localhost:8080/math/sum/3/5
-    @RequestMapping("/sum/{numberOne}/{numberTwo}")
-    public Double sum(
-            @PathVariable("numberOne") String numberOne,
-            @PathVariable("numberTwo") String numberTwo
-    ) throws Exception {
-        if (!isNumeric(numberOne) || !isNumeric(numberTwo)) throw  new IllegalArgumentException();
-        return  convertToDouble(numberOne) + convertToDouble(numberTwo) ;
-    }
-
-    private Double convertToDouble(String numberOne) {
-        return 1D;
-    }
-
-    private boolean isNumeric(String numberOne) {
-        return false;
-    }
-
+	public static boolean isNumeric(String strNumber) {
+		if (strNumber == null) return false; 
+		String number = strNumber.replaceAll(",", ".");
+			return number.matches("[-+]?[0-9]*\\.?[0-9]+");
+	}
 }
