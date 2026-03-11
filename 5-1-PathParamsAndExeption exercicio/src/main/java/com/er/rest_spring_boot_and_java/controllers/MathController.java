@@ -39,6 +39,17 @@ public class MathController {
                 throw new UnsupportedMathOperationException("Invalid operation!");
         }
     }
+    //endpoint unico para o squareroot...
+    @GetMapping("/squareroot/{number}")
+    public Double squareRoot(@PathVariable("number") String number) {
+
+        Double n = convertToDouble(number);
+
+        if (n < 0)
+            throw new UnsupportedMathOperationException("Square root of negative number is not allowed!");
+        double result = Math.sqrt(n);
+        return Math.round(result * 100.0) / 100.0; // redond
+    }
 
     public  Double convertToDouble(String strNumber) throws IllegalArgumentException {
 
