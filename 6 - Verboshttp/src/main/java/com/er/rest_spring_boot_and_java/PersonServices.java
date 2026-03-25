@@ -12,24 +12,26 @@ import java.util.logging.Logger;
 @Service
 public class PersonServices {
 
-    private  final AtomicLong counter = new AtomicLong();
-
+    // For ids
+    private final AtomicLong counter = new AtomicLong();
+    //logger
     private Logger logger = Logger.getLogger(PersonServices.class.getName());
 
-    public List<Person> findAll(){
+    //
+    public List<Person> findAll() {
         logger.info("Finding all Peaple");
-        List<Person> persons = new ArrayList<>();
-        for (int i = 0; i < 8 ; i++) {
 
-            Person person = mockPerson (i);
+        List<Person> persons = new ArrayList<>();
+        for (int i = 0; i < 8; i++) {
+
+            Person person = mockPerson(i);
             persons.add(person);
         }
-        return  persons;
+        return persons;
     }
 
 
-
-    public Person findById(String id){
+    public Person findById(String id) {
 
         logger.info("Finding one Person");
 
@@ -39,23 +41,24 @@ public class PersonServices {
         person.setLastName("Nogueira");
         person.setAddress("Valparaizo GO");
         person.setGender("male");
-        return  person;
+        return person;
     }
 
-        public Person create(Person person){
-            logger.info("create one Person");
-            return  person;
-        }
+    public Person create(Person person) {
+        logger.info("create one Person");
+        return person;
+    }
 
-        public void delete(String id){
-            logger.info("Delete one Person");
+    public void delete(String id) {
+        logger.info("Delete one Person");
 
-        }
-        public Person update(Person person){
-            logger.info("updating one Person");
-            return person;
+    }
 
-        }
+    public Person update(Person person) {
+        logger.info("updating one Person");
+        return person;
+
+    }
 
     private Person mockPerson(int i) {
         Person person = new Person();
@@ -64,6 +67,6 @@ public class PersonServices {
         person.setLastName("Lastname " + i);
         person.setAddress("Some Address in Brasil");
         person.setGender("male");
-        return  person;
+        return person;
     }
 }
